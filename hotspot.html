@@ -20,7 +20,7 @@
     <script type="text/javascript" src="./js/script.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
 </head>
-<body>
+<body onload="init()">
 <div class="container">
 <div class="col-md-12 header">HotSpot<hr/></div>
     <div class=" col-md-12" id="chartContainer" style="height: 300px; width:100%;"></div>
@@ -72,81 +72,4 @@
 
 </div>
 </body>
-<script>
-
-    var bar = new ProgressBar.SemiCircle(contain, {
-                strokeWidth: 6,
-                color: '#FFEA82',
-                trailColor: '#eee',
-                trailWidth: 1,
-                easing: 'easeInOut',
-                duration: 1400,
-                svgStyle: null,
-                text: {
-                    value: '',
-                    alignToBottom: false
-                },
-                from: {color: '#FFEA82'},
-                to: {color: '#ED6A5A'},
-                // Set default step function for all animate calls
-                step: (state, bar) => {
-                bar.path.setAttribute('stroke', state.color);
-    var value = Math.round(bar.value() * 100);
-    //if (value === 0) {
-     //    bar.setText('');
-    //} else {
-        bar.setText(cyVal);
-    //}
-
-    bar.text.style.color = state.color;
-    }
-    });
-    bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-    bar.text.style.fontSize = '5rem';
-    bar.text.style.top = '0px';
-
-    bar.animate(1);
-
-
-
-    /*
-     Preheat: 0 - .255
-     Soak:    .256 - .46
-     Ramp Up: .461 - .605
-     Cool: .606 - 1
-
-
-     */
-
-    reflow = new ProgressBar.Path('#reflow', {
-        easing: 'easeInOut',
-        duration: 4700,
-        from: { color: '#ED6A5A' },
-        to: { color: '#4CAF50' },
-        trailWidth: 8,
-        trailColor: '#4CAF50',
-        step: function(state, path) {
-            document.getElementById('reflow').style.stroke = state.color;
-            document.getElementById('state').style.color = state.color;
-            if(path.value()==1){
-                document.getElementById('state').innerHTML = "Start?";
-            }
-            else if(path.value()>.605){
-                document.getElementById('state').innerHTML = "Cool";
-            }
-            else if(path.value()>.46){
-                document.getElementById('state').innerHTML = "Ramp Up";
-            }
-            else if(path.value()>.255){
-                document.getElementById('state').innerHTML = "Soak";
-            }
-            else{
-                document.getElementById('state').innerHTML = "Preheat";
-            }
-        }
-    });
-
-    reflow.set(0);
-    reflow.animate(1);  // Number from 0.0 to 1.0
-</script>
 </html>

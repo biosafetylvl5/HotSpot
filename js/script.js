@@ -50,7 +50,7 @@ window.onload = function () {
                 //alert(responces);
                 //document.getElementById('current').innerHTML = Math.round(responces[0]);
                 document.getElementById('setpoint').innerHTML = Math.round(responces[1]);
-                document.getElementById('output').innerHTML = Math.round((responces[2]/255)*100);
+                document.getElementById('output').innerHTML = Math.round((responces[2] / 255) * 100);
                 yVal = Math.round(responces[0]);
                 temp = responces[0];
                 setpoint = responces[1];
@@ -66,16 +66,16 @@ window.onload = function () {
                 }
                 //alert(yVal);
                 chart.render();
-                x = x+1;
-                if(x>1){
-                    x=0;
+                x = x + 1;
+                if (x > 1) {
+                    x = 0;
                     cyVal = yVal;
-                    bar.animate(cyVal/responces[1]);
+                    bar.animate(cyVal / responces[1]);
                 }
             }
         };
 
-        xhttp.open("GET", "http://"+ip+"/temp", true);
+        xhttp.open("GET", "http://" + ip + "/temp", true);
         xhttp.send();
 
     };
@@ -94,17 +94,17 @@ function led(on) {
 
     var xhttp = new XMLHttpRequest();
     if (on) {
-        xhttp.open("GET", "http://"+ip+"/led/1", true);
+        xhttp.open("GET", "http://" + ip + "/led/1", true);
     } else {
-        xhttp.open("GET", "http://"+ip+"/led/0", true);
+        xhttp.open("GET", "http://" + ip + "/led/0", true);
     }
     xhttp.send();
 }
-function setSetPoint(){
+function setSetPoint() {
     var setpoint = prompt("Please enter the desired setpoint", document.getElementById('setpoint').innerHTMLexit);
     if (setpoint != null) {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "http://"+ip+"/set/setpointP"+setpoint+"P", true);
+        xhttp.open("GET", "http://" + ip + "/set/setpointP" + setpoint + "P", true);
         xhttp.send();
         //alert("http://"+ip+"/set/setpoint%"+setpoint+"%");
     }
@@ -143,7 +143,8 @@ function rPeak() {
 }
 function peak() {
     reflowSetPoint(250, 0, 255);
-    setTimeout(function () {refreshMode();
+    setTimeout(function () {
+        refreshMode();
     }, 7000);
 }
 function cooling() {
@@ -156,16 +157,16 @@ function cooling() {
         checkIfCool();
     }
 }
-function checkIfCool(){
-    if(temp<30){
+function checkIfCool() {
+    if (temp < 30) {
         reflow.animate(1);
         document.getElementById('setBtn').disabled = false;
-    }else{
-        console.log("Still cooling... "+temp);
+    } else {
+        console.log("Still cooling... " + temp);
         setTimeout(checkIfCool, 500);
     }
 }
-function animateGraph(){
+function animateGraph() {
     /*
      if(path.value()==1){
      document.getElementById('state').innerHTML = "Start?";
@@ -195,7 +196,7 @@ function animateGraph(){
     } else if (peakB) {
         reflow.animate(.6);
         console.log(.6);
-    }else if (coolingB){
+    } else if (coolingB) {
         reflow.animate(.99);
     }
 }
@@ -242,4 +243,82 @@ function reflowInit() {
     initialTime = Date.now();
     animateGraph();
     reflowF();
+}
+
+//Animation scripts
+function init() {
+    var bar = new ProgressBar.SemiCircle(contain, {
+            strokeWidth: 6,
+            color: '#FFEA82',
+            trailColor: '#eee',
+            trailWidth: 1,
+            easing: 'easeInOut',
+            duration: 1400,
+            svgStyle: null,
+            text: {
+                value: '',
+                alignToBottom: false
+            },
+            from: {color: '#FFEA82'},
+            to: {color: '#ED6A5A'},
+            // Set default step function for all animate calls
+            step: (state, bar) = > {
+            bar.path.setAttribute('stroke', state.color);
+    var value = Math.round(bar.value() * 100);
+//if (value === 0) {
+//    bar.setText('');
+//} else {
+    bar.setText(cyVal);
+//}
+
+    bar.text.style.color = state.color;
+}
+})
+    ;
+    bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+    bar.text.style.fontSize = '5rem';
+    bar.text.style.top = '0px';
+
+    bar.animate(1);
+
+
+    /*
+     Preheat: 0 - .255
+     Soak:    .256 - .46
+     Ramp Up: .461 - .605
+     Cool: .606 - 1
+
+
+     */
+
+    reflow = new ProgressBar.Path('#reflow', {
+        easing: 'easeInOut',
+        duration: 4700,
+        from: {color: '#ED6A5A'},
+        to: {color: '#4CAF50'},
+        trailWidth: 8,
+        trailColor: '#4CAF50',
+        step: function (state, path) {
+            document.getElementById('reflow').style.stroke = state.color;
+            document.getElementById('state').style.color = state.color;
+            if (path.value() == 1) {
+                document.getElementById('state').innerHTML = "Start?";
+            }
+            else if (path.value() > .605) {
+                document.getElementById('state').innerHTML = "Cool";
+            }
+            else if (path.value() > .46) {
+                document.getElementById('state').innerHTML = "Ramp Up";
+            }
+            else if (path.value() > .255) {
+                document.getElementById('state').innerHTML = "Soak";
+            }
+            else {
+                document.getElementById('state').innerHTML = "Preheat";
+            }
+        }
+    });
+
+    reflow.set(0);
+    reflow.animate(1);  // Number from 0.0 to 1.0
 }
