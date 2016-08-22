@@ -3,10 +3,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HotSpot</title>
 <head>
+    <!-- TODO: Get local files, offline usage -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="http://cdn.muicss.com/mui-0.6.5/js/mui.min.js"></script>
-    <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script> <!-- TODO: Get local files, offline usage -->
+    <script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
@@ -22,8 +23,10 @@
 </head>
 <body onload="init()">
 <div class="container">
-<div class="col-md-12 header">HotSpot<hr/></div>
-    <div class=" col-md-12" id="chartContainer" style="height: 300px; width:100%;"></div>
+    <div class="col-md-12 header">HotSpot
+        <hr/>
+    </div>
+    <div class=" col-md-12" id="chartContainer"></div>
     <div class="col-md-4">
 
         <div class="col-md-12" id="contain"></div>
@@ -32,27 +35,28 @@
             <div class="col-xs-6 temp-label">
                 <small>Target:</small>
             </div>
-            <div class="col-xs-6 temp"><span oninput="alert(document.getElementById('setpoint').innerHTML);" contentEditable='true' id="setpoint">12</span>&#x2103;</div>
+            <div class="col-xs-6 temp"><span oninput="alert(document.getElementById('setpoint').innerHTML);"
+                                             contentEditable='true' id="setpoint">12</span>&#x2103;</div>
         </h1>
         <h1>
             <div class="col-xs-6 temp-label">
                 <small>Output:</small>
             </div>
-            <div class="col-xs-6 temp"><span id="output" style="margin-right: 8px;">100</span>%</div>
+            <div class="col-xs-6 temp"><span id="output">100</span>%</div>
         </h1>
     </div>
     <div class="col-md-4">
 
         <div class="col-xs-12">
-            <button class="mui-btn mui-btn--large mui-btn--primary" style="width:100%;" onclick="led(true);">ON</button>
+            <button class="mui-btn mui-btn--large mui-btn--primary button-wide" onclick="led(true);">ON</button>
         </div>
         <div class="col-xs-12">
-            <button class="mui-btn mui-btn--large mui-btn--primary mui-btn--danger" style="width:100%;"
+            <button class="mui-btn mui-btn--large mui-btn--primary mui-btn--danger button-wide" style="width:100%;"
                     onclick="led(false);">OFF
             </button>
         </div>
         <div class="col-xs-12">
-            <button class="mui-btn mui-btn--large mui-btn--primary mui-btn--accent" id="setBtn" style="width:100%;"
+            <button class="mui-btn mui-btn--large mui-btn--primary mui-btn--accent button-wide" id="setBtn"
                     onclick="setSetPoint()">SET
             </button>
         </div>
@@ -61,13 +65,13 @@
     <div class="col-md-4">
         <svg viewBox="-10 -10 341.46285 230.00937">
             <g transform="translate(-205.92009,-265.8852)">
-                <path style="fill:none;fill-rule:evenodd;stroke:#f44336;stroke-width:16;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:15;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.94117647" d="m 208.43762,472.3622 71.72083,-128 115.66247,0 35.1028,-75.97735 93.94417,203.97735" id="reflow" inkscape:connector-curvature="0" sodipodi:nodetypes="ccccc" />
+                <path style="fill:none;fill-rule:evenodd;stroke:#f44336;stroke-width:16;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:15;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.94117647"
+                      d="m 208.43762,472.3622 71.72083,-128 115.66247,0 35.1028,-75.97735 93.94417,203.97735"
+                      id="reflow" inkscape:connector-curvature="0" sodipodi:nodetypes="ccccc"/>
             </g>
         </svg>
-        <div id="state" style="font-size: 5rem;font-weight: 400;font-family: 'Raleway', Helvetica, sans-serif;position: absolute;bottom: 15px;left: 4px;text-align: center;width: 100%;">State</div>
+        <div id="state">State</div>
     </div>
-
-
 
 
 </div>

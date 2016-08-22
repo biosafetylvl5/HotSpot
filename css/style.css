@@ -1,6 +1,7 @@
-.body{
+.body {
     font-family: "Raleway", Helvetica, sans-serif;
 }
+
 .canvasjs-chart-credit {
     display: none;
 }
@@ -13,8 +14,33 @@
 .temp-label {
     font-size: 1em;
 }
-.header{
+
+.header {
     font-size: 5em;
     font-family: "Raleway", Helvetica, sans-serif;
     font-weight: 400;
+}
+
+#chartContainer {
+    height: 300px;
+    width: 100%;
+}
+
+#output {
+    margin-right: 8px;
+}
+
+.button-wide {
+    width: 100%;
+}
+
+#state {
+    font-size: 5rem;
+    font-weight: 400;
+    font-family: 'Raleway', Helvetica, sans-serif;
+    position: absolute;
+    bottom: 15px;
+    left: 4px;
+    text-align: center;
+    width: 100%;
 }
