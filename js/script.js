@@ -1,4 +1,4 @@
-var ip = "192.168.0.13";
+var ip = "192.168.4.1";
 
 var avgY;
 var yVal;
@@ -247,7 +247,7 @@ function reflowInit() {
 
 //Animation scripts
 function init() {
-    var bar = new ProgressBar.SemiCircle(contain, {
+    bar = new ProgressBar.SemiCircle(contain, {
             strokeWidth: 6,
             color: '#FFEA82',
             trailColor: '#eee',
@@ -262,7 +262,7 @@ function init() {
             from: {color: '#FFEA82'},
             to: {color: '#ED6A5A'},
             // Set default step function for all animate calls
-            step: (state, bar) = > {
+            step: (state, bar) => {
             bar.path.setAttribute('stroke', state.color);
     var value = Math.round(bar.value() * 100);
 //if (value === 0) {
@@ -274,7 +274,7 @@ function init() {
     bar.text.style.color = state.color;
 }
 })
-    ;
+
     bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
     bar.text.style.fontSize = '5rem';
     bar.text.style.top = '0px';
