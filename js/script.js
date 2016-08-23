@@ -143,13 +143,13 @@ function rPeak() {
 }
 function peak() {
     reflowSetPoint(250, 0, 255);
-    setTimeout(function () {
+    refreshIntervalID = setTimeout(function () {
         refreshMode();
     }, 7000);
 }
 function cooling() {
     if (setpoint > 10) {
-        reflowSetPoint(setpoint, -15, 255);
+        refreshIntervalID = reflowSetPoint(setpoint, -15, 255);
         setTimeout(cooling, 5000);
     } else {
         coolingB = false;
@@ -163,7 +163,7 @@ function checkIfCool() {
         document.getElementById('setBtn').disabled = false;
     } else {
         console.log("Still cooling... " + temp);
-        setTimeout(checkIfCool, 500);
+        refreshIntervalID = setTimeout(checkIfCool, 500);
     }
 }
 function animateGraph() {
@@ -321,4 +321,24 @@ function init() {
 
     reflow.set(0);
     reflow.animate(1);  // Number from 0.0 to 1.0
+}
+
+function off(){
+    rampB = false;
+    soakB = false;
+    rPeakB = false;
+    peakB = true;
+    coolingB = false;
+    first = false;
+    refreshMode();
+    try {
+        clearInterval(refreshIntervalID);
+        clearTimeout(refreshIntervalID);
+    }
+    catch(e) {
+        clearTimeout(refreshIntervalID);
+    }
+}
+function on(){
+    reflowInit();
 }
