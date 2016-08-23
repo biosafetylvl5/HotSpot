@@ -7,3 +7,7 @@ HotSpot is an ESP8266 powered hotplate designed for use in small reflow operatio
 1. Download/Clone repository
 2. Extract if nessesary
 3. Open hotspot.html using Google Chrome, FireFox or Microsoft Edge
+
+## Software Usage
+
+<img src="./github/hotspot-full-screenshot.png" alt="HotSpot UI Screenshot" align="center" />
