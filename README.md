@@ -49,7 +49,7 @@ The label under the bar indicates the current stage in conjunction with the colo
 
 ## Hardware
 
-![Breadboard Layout](./github/breadboard-layout.svg)
+![Breadboard Layout](./github/breadboard-layout.png)
 
 ### BOM (Bill of Materials)
 
