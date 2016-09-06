@@ -12,7 +12,8 @@ HotSpot is an ESP8266 powered hotplate designed for use in small reflow operatio
 
 ### Software Usage
 
-The hotspot user interface is written in html, javascript and css. If those sound familiar, they should. These are the langudges that make up the web, and you already have the viewing installed. The UI runs in any modern browser and communicates with the hotspot via wifi.
+The hotspot user interface is written in html, javascript and css. If those sound familiar, they should. These are the langudges that make up the web, and you already have the viewer installed. The UI runs 
+in any modern browser and communicates with the hotspot via wifi.
 
 Screenshot:
 
